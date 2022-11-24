@@ -1,0 +1,23 @@
+<!-- Definimos los elementos y atributos de "pedido" -->
+<!ELEMENT pedido (cliente, articulos, total)>
+<!ATTLIST pedido numero CDATA #REQUIRED>
+<!ATTLIST pedido dia CDATA #REQUIRED>
+<!ELEMENT cliente (nombre, apellido)>
+<!ELEMENT articulos (articulo+)>
+<!ELEMENT total EMPTY>
+
+<!-- Definimos los elementos y atributos de "cliente" -->
+<!ATTLIST cliente codigo CDATA #IMPLIED>
+<!ELEMENT nombre (#PCDATA)>
+<!ELEMENT apellido (#PCDATA)>
+
+<!-- Definimos los elementos y atributos de "articulos" -->
+<!ELEMENT articulo (descripcion, cantidad, precio)>
+
+<!-- Definimos los elementos y atributos de "articulo" -->
+<!ELEMENT descripcion (#PCDATA)>
+<!ELEMENT cantidad (#PCDATA)>
+<!ELEMENT precio (#PCDATA)>
+
+<!-- Definimos los elementos y atributos de "total" -->
+<!ATTLIST total valor CDATA #REQUIRED>
