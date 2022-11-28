@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="recetas" type="TRecetas"/>
+
+    <!-- Definimos el elemento raíz del XML. En este caso será "recetas"-->
+    <xs:complexType name="TRecetas">
+        <xs:sequence>
+           <xs:element name="receta" type="TReceta" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- 
+        Definimos el tipo de elemento TRecetas
+        Con "atribute", después del conjunto de elementos se definen los atributos
+        Se identifican con "name" y se indica el tipo de dato que almacenan con "type"
+    -->
+    <xs:complexType name="TReceta">
+        <xs:sequence>
+           <xs:element name="nombre" type="TNombre"/>
+           <xs:element name="calorias" type="xs:integer"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:integer" use="required" />
+    </xs:complexType>
+
+    <!-- 
+        Definimos el tipo de elemento TNombre
+        En este caso no hay una serie de elementos que hay que ordenar
+        Por ello, se usa "simpleContent" y "extension" para indicar con "base" que 
+        el elemento es de tipo "string" y poderle añadir un atributo
+        Se identifica con "name" y se indica el tipo de dato que almacena con "type"
+        Por defecto los atributos son opcionales. Con "default" se les da un valor por defecto.
+    -->
+    <xs:complexType name="TNombre">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="idioma" type="xs:string" default="EUSK" />
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+</xs:schema>

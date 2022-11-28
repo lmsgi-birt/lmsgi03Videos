@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+	<!-- Definición del elemento raíz -->
+	<xs:element name="recetas" type="TRecetas"/>
+
+	<!-- Definición del tipo TRecetas -->
+	<xs:complexType name="TRecetas">
+		<xs:sequence>
+			<xs:element name="receta" type="TReceta" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- Definición del tipo TReceta -->
+	<xs:complexType name="TReceta">
+		<xs:sequence>
+			<xs:element name="nombre" type="xs:string"/>
+			<xs:element name="calorias" type="TCalorias"/>
+			<xs:element name="ingredientes" type="Tingredientes"/>
+			<xs:element name="pasos" type="TPasos"/>
+		</xs:sequence>
+		<xs:attribute name="tipo" type="xs:string"/>
+		<!-- El atributo es opcional y se le da un valor por defecto-->
+		<xs:attribute name="fecha" type="xs:date" default="2020-10-02"/> 
+	</xs:complexType>
+	
+	<!-- Definición del tipo TCalorias: condición a un tipo predefinido, simpleType -->
+	<xs:simpleType name="TCalorias">
+		<xs:restriction base="xs:integer"> 
+			<xs:maxInclusive value="600"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!-- Definición del tipo Tingredientes -->
+	<xs:complexType name="Tingredientes">
+		<xs:sequence>
+			<xs:element name="ingrediente" type="Tingrediente" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- Definición del tipo Tingre: tipo predefinido con atributo, simpleContent -->
+	<xs:complexType name="Tingrediente">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="cantidad" type="xs:string" use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<!-- Definición del tipo TPasos -->
+	<xs:complexType name="TPasos">
+		<xs:sequence>
+			<xs:element name="paso" type="TPaso" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- Definición del tipo TPaso: tipo predefinido con atributo, simpleContent -->
+	<xs:complexType name="TPaso">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="orden" type="TOrden" use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<!-- Definición del tipo TOrden: condición a un tipo predefinido, simpleType -->
+	<xs:simpleType name="TOrden">
+		<xs:restriction base="xs:integer">
+			<xs:totalDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+</xs:schema> 

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    
+    <!-- Definición del elemento raíz -->
+    <xs:element name="productosfinancieros" type="TProductosFinancieros"/>
+
+    <!-- Definición del tipo TProductosFinancieros -->
+    <xs:complexType name="TProductosFinancieros">
+        <xs:sequence>
+            <xs:element name="producto" type="TProducto" maxOccurs="unbounded"/>
+        </xs:sequence>      
+    </xs:complexType>
+
+    <!-- Definición del tipo TProducto -->
+    <xs:complexType name="TProducto">     
+        <xs:choice>
+            <xs:element name="bono" type="TBono"/>
+            <xs:element name="futuro" type="TFuturo"/>
+            <xs:element name="acciones" type="TAcciones"/>
+        </xs:choice>
+    </xs:complexType>
+
+    <!-- Definición del tipo TBono -->
+    <xs:complexType name="TBono">           
+        <xs:sequence>
+            <xs:element name="valoractual" type="TValorActual"/>
+            <xs:element name="beneficio" type="TBeneficio"/>
+        </xs:sequence> 
+    </xs:complexType>
+
+    <!-- Definición del tipo TValorActual: tipo predefinido con atributo, simpleContent -->
+    <xs:complexType name="TValorActual">
+        <xs:simpleContent>
+            <xs:extension base="xs:decimal">
+                <xs:attribute name="moneda" type="TMoneda"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <!-- Definición del tipo TMoneda: condición a un tipo predefinido, simpleType -->
+    <xs:simpleType name="TMoneda">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="dolares"/>
+            <xs:enumeration value="euros"/>
+            <xs:enumeration value="yenes"/>
+        </xs:restriction>
+    </xs:simpleType> 
+    
+    <!-- Definición del tipo TBeneficio: condición a un tipo predefinido, simpleType -->
+    <xs:simpleType name="TBeneficio">
+        <xs:restriction base="xs:decimal">
+            <xs:fractionDigits value="2"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Definición del tipo TFuturo -->
+    <xs:complexType name="TFuturo">
+        <xs:sequence>
+            <xs:element name="elemento" type="TElemento"/>
+            <xs:element name="beneficio" type="TBeneficio"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Definición del tipo TElemento: tipo predefinido con atributo, simpleContent -->
+    <xs:complexType name="TElemento">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="idioma" type="xs:string"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <!-- Definición del tipo TAcciones -->
+    <xs:complexType name="TAcciones">
+        <xs:sequence>
+            <xs:element name="empresa" type="TEmpresa"/>
+            <xs:element name="beneficio" type="TBeneficio"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Definición del tipo TEmpresa: tipo predefinido con atributo, simpleContent -->
+    <xs:complexType name="TEmpresa">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="pais" type="TPais"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <!-- Definición del tipo TPais: condición a un tipo predefinido, simpleType -->
+    <xs:simpleType name="TPais">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="alemania"/>
+            <xs:enumeration value="japon"/>
+            <xs:enumeration value="espania"/>
+            <xs:enumeration value="usa"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

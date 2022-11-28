@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<productosfinancieros xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:noNamespaceSchemaLocation="finanzas.xsd">
+    <producto>
+        <bono>
+            <valoractual moneda="euros">3.125</valoractual>
+            <beneficio>2.98</beneficio>
+        </bono>
+    </producto>
+
+    <producto>
+        <futuro>
+            <elemento idioma="Castellano" >Petroleo</elemento>
+            <beneficio>3.85</beneficio>
+        </futuro>
+    </producto>
+
+    <producto>
+        <futuro>
+            <elemento idioma="Castellano" >Petroleo 2</elemento>
+            <beneficio>-3.85</beneficio>
+        </futuro>
+        
+    </producto>
+    <producto>
+        <acciones>
+            <empresa pais= "japon">EMPRESA 1</empresa>
+            <beneficio>5.36
+            </beneficio>
+        </acciones>
+    </producto>
+
+</productosfinancieros>

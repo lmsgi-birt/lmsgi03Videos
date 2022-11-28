@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="recetas" type="TRecetas"/>
+
+    <!-- Definimos el tipo de elemento TRecetas -->
+    <xs:complexType name="TRecetas">
+        <xs:sequence>
+           <xs:element name="receta" type="TReceta" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- 
+        Definimos el tipo de elemento TReceta
+        Se sustituye el tipo predefinido xs:string del atributo por TNombrePatron
+     -->
+    <xs:complexType name="TReceta">
+        <xs:sequence>
+           <xs:element name="nombre" type="TNombre"/>
+           <xs:element name="calorias" type="xs:integer"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="TIdPatron" use="required" />
+    </xs:complexType>
+
+    <!-- 
+        Definimos el tipo de elemento TNombre
+        Se sustituye el tipo predefinido xs:string de base por TNombrePatron
+     -->
+    <xs:complexType name="TNombre">
+        <xs:simpleContent>
+            <xs:extension base="TNombrePatron">
+                <xs:attribute name="idioma" type="xs:string" default="EUSK" />
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <!-- 
+        Definimos el tipo de elemento TIdPatron
+        En este caso no contiene ni elementos ni atributos
+        Solo se quiere añadir una condición a los valores que puede tomar el elemento "nombre"
+        Será un tipo simple y se usarán "simpleType" y "restriction" para definir la condición
+        Expresiones regulares:
+        value="[a-z]?": indicamos los valores que pueden aparecer y con ?, + y * las veces que aparece
+        value="[12]{2}": indicamos los valores que pueden aparecer y cuántas veces
+        value=".*": Cualquier valor todas las veces que queramos
+        value="A[0-9]{2}": Empieza por A y le siguen 2 números del 0 al 9
+        value="[^A].*": Empieza por cualquier carácter que no sea la A y le sigue cualquier texto
+     -->
+     <xs:simpleType name="TIdPatron">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="Receta[0-9]{3}.+"></xs:pattern>
+        </xs:restriction>
+     </xs:simpleType>
+
+     <!-- 
+        Definimos el tipo de elemento TNombrePatron
+        En este caso, se sustituye por el xs:string de la base de TNombre
+        Será un tipo simple y se usarán "simpleType" y "restriction" para definir la condición
+        Controla que el texto empiece por una letra mayúscula
+     -->
+     <xs:simpleType name="TNombrePatron">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[A-Z].*"></xs:pattern>
+        </xs:restriction>
+     </xs:simpleType>
+</xs:schema>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="recetas" type="TRecetas"/>
+
+    <!-- Definimos el tipo de elemento TRecetas -->
+    <xs:complexType name="TRecetas">
+        <xs:sequence>
+           <xs:element name="receta" type="TReceta" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Definimos el tipo de elemento TReceta -->
+    <xs:complexType name="TReceta">
+        <xs:sequence>
+           <xs:element name="nombre" type="TNombre"/>
+           <xs:element name="calorias" type="TCalorias"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:integer" use="required" />
+    </xs:complexType>
+
+    <!-- Definimos el tipo de elemento TNombre -->
+    <xs:complexType name="TNombre">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="idioma" type="TIdiomaEnum" default="EUS" />
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <!-- 
+        Definimos el tipo de elemento TIdiomaEnum
+        En este caso no contiene ni elementos ni atributos
+        Solo se quiere añadir una condición a los valores que puede tomar el atributo "idioma"
+        Será un tipo simple y se usarán "simpleType" y "restriction" para definir la condición
+     -->
+     <xs:simpleType name="TIdiomaEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="ES" />
+            <xs:enumeration value="EUS"></xs:enumeration>
+            <xs:enumeration value="EN"></xs:enumeration>
+        </xs:restriction>
+     </xs:simpleType>
+
+     <!-- 
+        Definimos el tipo de elemento TCalor
+        También es un tipo simple
+		Se usa "minInclusive" y "maxInclusive" para definir los valores límite
+     -->
+     <xs:simpleType name="TCalorias">
+        <xs:restriction base="xs:integer">
+            <xs:maxInclusive value="500"></xs:maxInclusive>
+            <xs:minInclusive value="200"></xs:minInclusive>
+        </xs:restriction>
+     </xs:simpleType>
+
+</xs:schema>
