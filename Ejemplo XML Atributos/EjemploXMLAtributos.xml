@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Ejemplo XML utilizado en los vídeos -->
+
+<!DOCTYPE modulos>
+
+<modulos>
+    <modulo id="LMSGI">  
+        <nombre>Lenguaje de marcas y sistemas de gestión de la informaición</nombre>
+        <profesores>
+            <profesor>
+                <nombreprofesor>Nora San Saturnino</nombreprofesor>
+                <idprofesor>0001</idprofesor>
+            </profesor>
+            <profesor>
+                <nombreprofesor>Itziar Gortazar</nombreprofesor>
+                <idprofesor>0002</idprofesor>
+            </profesor>
+        </profesores>
+    </modulo>
+
+    <modulo id="BBDD">
+        <nombre>Bases de Datos</nombre>
+        <profesores>
+            <profesor horas="180">
+                <nombreprofesor>Beñat Madina</nombreprofesor>
+                <idprofesor>0003</idprofesor>
+            </profesor>
+        </profesores>
+    </modulo>
+
+</modulos>

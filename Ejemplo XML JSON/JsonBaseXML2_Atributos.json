@@ -1,0 +1,11 @@
+{
+    "libro": 
+    { 
+        "paginas": 347,
+        "titulo": "XML practico",
+        "autor": ["SebastienLecomte","Thierry Boulanger"],
+        "editorial": "Ediciones Eni",
+        "isbn": "978-2-7460-4958-1",
+        "edicion": 1
+    }
+}
